@@ -24,7 +24,7 @@ var app = {
         hammertime.get('pinch').set({enable: true});
         hammertime.get('rotate').set({enable: true});
 
-        hammertime.on('tab dobletab pan swipe press pinch rotate', function(en){
+        hammertime.on('tab dobletab pan swipe press pinch rotate', function(ev){
             document.querySelector('#info').innerHTML=ev.type+'!';
         });
 
