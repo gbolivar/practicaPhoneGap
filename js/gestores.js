@@ -24,9 +24,36 @@ var app = {
         hammertime.get('pinch').set({enable: true});
         hammertime.get('rotate').set({enable: true});
 
-        hammertime.on('tab doubletab swipe press rotate', function(ev){
-            document.querySelector('#info').innerHTML=ev.type+'!';
+        // Animation
+
+        zona.addEventListener('webkitAnimationEnd',function(e){
+            zona.className='';
         });
+
+        hammertime.on('doubletab',function(ev){
+            zona.className='doubletab';
+        });
+
+        hammertime.on('press',function(ev){
+            zona.className='press';
+        });
+
+        hammertime.on('swipe',function(ev){
+            var clase=undefined;
+            direccion=ev.direction;
+            if(direccion==2) clase='swipe-derecha';
+            if(direccion==4) clase='swipe-izquierda';
+            zona.className=clase;
+        });
+
+        hammertime.on('rotate',function(ev){
+            var umbral = 25;
+            if(ev.distance > umbral) zona.className='rotate';
+        });
+
+        /*hammertime.on('tab doubletab swipe press rotate', function(ev){
+            document.querySelector('#info').innerHTML=ev.type+'!';
+        });*/
 
     },
     ponloClaro: function(){
